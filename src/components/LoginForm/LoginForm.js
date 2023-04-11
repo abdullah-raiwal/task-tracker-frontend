@@ -24,7 +24,7 @@ const LoginForm = (props) => {
         password: "",
       },
       validationSchema: loginSchema,
-      onSubmit: (values, action) => {
+      onSubmit: async (values, action) => {
         const data = new FormData();
         data.append("username", values.username);
         data.append("password", values.password);
@@ -34,13 +34,13 @@ const LoginForm = (props) => {
           password: data.get("password"),
         };
         try {
-          const response = loginUser(actual_data).unwrap();
+          const response = await loginUser(actual_data).unwrap();
           const token = {
             access: response.access_token,
             refresh: response.refresh_token,
             user_id: response.user_id,
           };
-
+          console.log("in login", token)
           storeToken(token);
           dispatch(setAccessToken({ access: token.access }));
           dispatch(LoginFormFalse());
