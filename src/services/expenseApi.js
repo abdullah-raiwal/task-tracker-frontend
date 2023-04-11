@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const expenseApi = createApi({
   reducerPath: "expenseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/",
+    baseUrl: "https://tracker-ebon.vercel.app/api/",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.access_token;
       if (token) {

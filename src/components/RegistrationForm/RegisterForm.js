@@ -22,7 +22,7 @@ const RegisterForm = (props) => {
 
       validationSchema: RegisterSchema,
 
-      onSubmit: async (values, action) => {
+      onSubmit: (values, action) => {
         const data = new FormData();
         data.append("username", values.username);
         data.append("email", values.email);
@@ -37,19 +37,18 @@ const RegisterForm = (props) => {
         };
 
         try {
-          const response = await registerUser(actual_data).unwrap();
+          const response = registerUser(actual_data).unwrap();
           console.log(response);
 
           dispatch(LoginFormTrue());
           dispatch(RegFormFalse());
         } catch (error) {
           setServerError(error);
-          console.log(error)
+          console.log(error);
         }
       },
     });
 
-  
   return (
     <div>
       <Card className="mt-1 mb-2 w-1/3 sm:w-11/12 md:w-1/2 lg:w-1/3 xl:w-1/3 2xl:w-1/4 bg-slate-900 mx-auto">
@@ -133,7 +132,7 @@ const RegisterForm = (props) => {
 
             {serverError.status ? <p>{serverError.data.password2[0]}</p> : ""}
           </div>
-          
+
           <button
             className="mb-2 mt-2 bg-slate-600 mx-10 rounded-md text-white"
             type="submit"

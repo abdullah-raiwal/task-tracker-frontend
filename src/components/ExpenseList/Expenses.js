@@ -16,6 +16,15 @@ const Expenses = (props) => {
     }
   }
 
+  if (error){
+    return (
+      <div>
+        <Card>no task found</Card>
+      </div>
+    )
+  }
+
+
   const filtereditems = data.filter((expense) => {
     return new Date(expense.date).getFullYear().toString() === props.year;
   });

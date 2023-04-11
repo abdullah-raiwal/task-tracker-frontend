@@ -24,17 +24,17 @@ const LoginForm = (props) => {
         password: "",
       },
       validationSchema: loginSchema,
-      onSubmit: async (values, action) => {
+      onSubmit: (values, action) => {
         const data = new FormData();
         data.append("username", values.username);
-        data.append("password", values.password); 
+        data.append("password", values.password);
 
         const actual_data = {
           username: data.get("username"),
           password: data.get("password"),
         };
         try {
-          const response = await loginUser(actual_data).unwrap();
+          const response = loginUser(actual_data).unwrap();
           const token = {
             access: response.access_token,
             refresh: response.refresh_token,
@@ -68,9 +68,11 @@ const LoginForm = (props) => {
               onChange={handleChange}
               onBlur={handleblur}
             />
-            {serverError.status ? <p>{serverError.data.non_field_errors}</p> : ""}
-           
-
+            {serverError.status ? (
+              <p>{serverError.data.non_field_errors}</p>
+            ) : (
+              ""
+            )}
           </div>
           <div className="flex flex-col mx-10 py-1">
             <label className="my-1 text-white font-sans font-bold-400">
@@ -85,7 +87,11 @@ const LoginForm = (props) => {
               onChange={handleChange}
               onBlur={handleblur}
             />
-            {serverError.status ? <p>{serverError.data.non_field_errors}</p> : ""}
+            {serverError.status ? (
+              <p>{serverError.data.non_field_errors}</p>
+            ) : (
+              ""
+            )}
           </div>
           <button
             // onClick={props.hideForm}
